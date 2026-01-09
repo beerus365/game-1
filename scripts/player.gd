@@ -48,10 +48,15 @@ func _physics_process(delta: float) -> void:
 			
 	move_and_slide()
 
+# Attack for player
+@export var bullet_scene: PackedScene
+@onready var gun_point = $GunPoint
 	
 func _attack():
 	attacking = true
 	animated_sprite.play("shoot")
+	
+	fire()
 	
 	await animated_sprite.animation_finished
 	attacking = false
@@ -60,19 +65,23 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("attack"):
 		_attack()
 		
-# Bullet process
-var bullet_path=preload("res://scenes/bullets.tscn")
-
+# Bullet processd l
 func _bullet_physics(delta):
 	look_at(get_global_mouse_position())
 	if Input.is_action_just_pressed("attack"):
 		fire()
 		
 func fire():
-	var bullet=bullet_path.instantiate()
+	var bullet=bullet_scene.instantiate()
 	
-	bullet.dir = rotation
-	bullet.pos = $Node2D.global_position
-	bullet.rota=global_rotation
+	# Set global position
+	bullet.global_position = gun_point.global_position
+	
+	# Set direction on where the player is facing
+	if animated_sprite.flip_h:
+		bullet.direction = -1
+	else:
+		bullet.direction = 1
+		
 	get_parent().add_child(bullet)
 	
