@@ -5,7 +5,6 @@ const SPEED = 100.0
 const JUMP_VELOCITY = -275.0
 
 @onready var animated_sprite = $AnimatedSprite2D
-@export var attacking = false
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -49,9 +48,10 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 # Attack for player
+@export var attacking = false
 @export var bullet_scene: PackedScene
 @onready var gun_point = $GunPoint
-	
+		
 func _attack():
 	attacking = true
 	animated_sprite.play("shoot")

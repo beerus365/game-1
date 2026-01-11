@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://belmfi8fh5s17"]
+[gd_scene load_steps=17 format=3 uid="uid://belmfi8fh5s17"]
 
 [ext_resource type="Script" uid="uid://d2acwl5rswvv" path="res://scripts/coin.gd" id="1_i64fm"]
 [ext_resource type="Texture2D" uid="uid://bwv7d02xwoft5" path="res://assets/sprites3/miscellaneous sprites/coin_anim_strip_6.png" id="1_rwqht"]
@@ -27,10 +27,6 @@ region = Rect2(32, 0, 8, 8)
 [sub_resource type="AtlasTexture" id="AtlasTexture_jig8b"]
 atlas = ExtResource("1_rwqht")
 region = Rect2(40, 0, 8, 8)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xmuha"]
-atlas = ExtResource("3_11l1o")
-region = Rect2(0, 0, 8, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kfxoj"]
 atlas = ExtResource("3_11l1o")
@@ -79,9 +75,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_xmuha")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_kfxoj")
 }, {
 "duration": 1.0,
@@ -105,6 +98,7 @@ animations = [{
 radius = 4.0
 
 [node name="Coin" type="Area2D"]
+z_index = 10
 collision_mask = 2
 script = ExtResource("1_i64fm")
 
@@ -112,7 +106,7 @@ script = ExtResource("1_i64fm")
 sprite_frames = SubResource("SpriteFrames_xmuha")
 animation = &"pick_up"
 autoplay = "idle"
-frame = 5
+frame = 4
 frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

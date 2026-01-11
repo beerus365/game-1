@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ce5sdlm8pvtvy"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jmd42"]
+
+[node name="Heart" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_jmd42")
