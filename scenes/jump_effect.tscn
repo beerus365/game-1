@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://cnfs3tdslmvfd"]
+
+[ext_resource type="Texture2D" uid="uid://diwxr4ev4ws51" path="res://assets/sprites3/herochar sprites(new)/herochar_before_jump_dust_anim_strip_4.png" id="1_bjxcn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bjxcn"]
+atlas = ExtResource("1_bjxcn")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ow0h"]
+atlas = ExtResource("1_bjxcn")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3mt62"]
+atlas = ExtResource("1_bjxcn")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2qibh"]
+atlas = ExtResource("1_bjxcn")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7mmkl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bjxcn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ow0h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3mt62")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2qibh")
+}],
+"loop": false,
+"name": &"jump_effect",
+"speed": 5.0
+}]
+
+[node name="JumpEffect" type="AnimatedSprite2D"]
+z_index = 10
+sprite_frames = SubResource("SpriteFrames_7mmkl")
+animation = &"jump_effect"

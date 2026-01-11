@@ -1,10 +1,10 @@
-[gd_scene load_steps=30 format=3 uid="uid://dtcbncjg42ggo"]
+[gd_scene load_steps=26 format=3 uid="uid://dtcbncjg42ggo"]
 
 [ext_resource type="Texture2D" uid="uid://biro12lx333x0" path="res://assets/sprites3/herochar sprites(new)/herochar_idle_anim_strip_4.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://crwyjhpsaidfb" path="res://scripts/player.gd" id="1_g2els"]
+[ext_resource type="PackedScene" uid="uid://cnfs3tdslmvfd" path="res://scenes/jump_effect.tscn" id="2_fjrip"]
 [ext_resource type="Texture2D" uid="uid://bghxbch6ksj3d" path="res://assets/sprites3/herochar sprites(new)/herochar_jump_up_anim_strip_3.png" id="3_dqkch"]
 [ext_resource type="Texture2D" uid="uid://b02o4gf0ybosr" path="res://assets/sprites3/herochar sprites(new)/herochar_run_anim_strip_6.png" id="4_qlg0r"]
-[ext_resource type="Texture2D" uid="uid://diwxr4ev4ws51" path="res://assets/sprites3/herochar sprites(new)/herochar_before_jump_dust_anim_strip_4.png" id="5_fjrip"]
 [ext_resource type="Texture2D" uid="uid://bdf0jc3rje86g" path="res://assets/sprites3/herochar sprites(new)/herochar_sword_attack_anim_strip_4.png" id="5_qlg0r"]
 [ext_resource type="PackedScene" uid="uid://b6ncvoevesnro" path="res://scenes/bullet.tscn" id="6_tuyoq"]
 
@@ -35,22 +35,6 @@ region = Rect2(16, 0, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_smehm"]
 atlas = ExtResource("3_dqkch")
 region = Rect2(32, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fulsm"]
-atlas = ExtResource("5_fjrip")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4r5pv"]
-atlas = ExtResource("5_fjrip")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_60mlk"]
-atlas = ExtResource("5_fjrip")
-region = Rect2(32, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_i4ail"]
-atlas = ExtResource("5_fjrip")
-region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ur7pv"]
 atlas = ExtResource("4_qlg0r")
@@ -123,23 +107,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_fulsm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4r5pv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_60mlk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_i4ail")
-}],
-"loop": true,
-"name": &"jump_effect",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_ur7pv")
 }, {
 "duration": 1.0,
@@ -183,12 +150,14 @@ height = 12.0
 [node name="Player" type="CharacterBody2D"]
 z_index = 5
 script = ExtResource("1_g2els")
+jump_effect = ExtResource("2_fjrip")
 bullet_scene = ExtResource("6_tuyoq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tuyoq")
-animation = &"jump_effect"
+animation = &"jump"
 autoplay = "idle"
+frame_progress = 0.55243355
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
@@ -198,5 +167,3 @@ shape = SubResource("CapsuleShape2D_fjrip")
 
 [node name="GunPoint" type="Marker2D" parent="."]
 position = Vector2(6, 0)
-
-[node name="Jump_Effect" type="Marker2D" parent="."]

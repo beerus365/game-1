@@ -5,6 +5,7 @@ const SPEED = 100.0
 const JUMP_VELOCITY = -275.0
 
 @onready var animated_sprite = $AnimatedSprite2D
+@export var jump_effect: PackedScene
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -14,6 +15,7 @@ func _physics_process(delta: float) -> void:
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
+		_play_jump_effect()
 
 	# Handles player movements: -1, 0, 1
 	var direction := Input.get_axis("move_left", "move_right")
@@ -46,6 +48,17 @@ func _physics_process(delta: float) -> void:
 			animated_sprite.play("jump")		
 			
 	move_and_slide()
+	
+func _play_jump_effect():
+
+	var fx = jump_effect.instantiate()
+	fx.global_position = global_position + Vector2(0, 0)
+	
+	get_parent().add_child(fx)
+	
+	fx.play("jump_effect")
+	await fx.animation_finished
+	fx.queue_free()
 
 # Attack for player
 @export var attacking = false
