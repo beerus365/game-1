@@ -57,6 +57,7 @@ radius = 3.0
 
 [node name="Bullet" type="Area2D"]
 z_index = 10
+collision_mask = 3
 script = ExtResource("1_y25gk")
 
 [node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]

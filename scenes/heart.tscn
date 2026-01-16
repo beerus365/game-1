@@ -2,5 +2,5 @@
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jmd42"]
 
-[node name="Heart" type="AnimatedSprite2D"]
+[node name="Health" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_jmd42")

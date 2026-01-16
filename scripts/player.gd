@@ -11,7 +11,7 @@ func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-
+				
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
@@ -43,9 +43,14 @@ func _physics_process(delta: float) -> void:
 			if direction == 0:
 				animated_sprite.play("idle")
 			else:
-				animated_sprite.play("run")		
+				animated_sprite.play("run")	
+				
 		else:
-			animated_sprite.play("jump")		
+			animated_sprite.play("jump")	
+		
+		if velocity.y < 0 and not is_on_floor():
+			animated_sprite.play("jump_down")
+
 			
 	move_and_slide()
 	
@@ -64,11 +69,10 @@ func _play_jump_effect():
 @export var attacking = false
 @export var bullet_scene: PackedScene
 @onready var gun_point = $GunPoint
-		
+
 func _attack():
 	attacking = true
 	animated_sprite.play("shoot")
-	
 	fire()
 	
 	await animated_sprite.animation_finished
@@ -78,23 +82,27 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("attack"):
 		_attack()
 		
-# Bullet processd l
-func _bullet_physics(delta):
-	look_at(get_global_mouse_position())
-	if Input.is_action_just_pressed("attack"):
-		fire()
-		
 func fire():
+	if bullet_scene == null:
+		print("No bullet")
+		return
+	
 	var bullet=bullet_scene.instantiate()
 	
 	# Set global position
+	if animated_sprite.flip_h:
+		gun_point.position.x = -20
+	else:
+		gun_point.position.x = 20
+	
 	bullet.global_position = gun_point.global_position
+	get_tree().current_scene.add_child(bullet)
 	
 	# Set direction on where the player is facing
 	if animated_sprite.flip_h:
-		bullet.direction = -1
+		bullet.setup(-1)
 	else:
-		bullet.direction = 1
+		bullet.setup(1)
 		
-	get_parent().add_child(bullet)
+		
 	

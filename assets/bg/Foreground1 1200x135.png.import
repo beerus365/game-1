@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://egf6pgk4dvun"
-path="res://.godot/imported/background.png-2f02aa40f1550b3f2ae14573438e8f80.ctex"
+uid="uid://pmbfkxa5j14k"
+path="res://.godot/imported/Foreground1 1200x135.png-616d642094abe4387e0bb9cfe59cc544.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites3/tiles and background_foreground (new)/background.png"
-dest_files=["res://.godot/imported/background.png-2f02aa40f1550b3f2ae14573438e8f80.ctex"]
+source_file="res://assets/bg/Foreground1 1200x135.png"
+dest_files=["res://.godot/imported/Foreground1 1200x135.png-616d642094abe4387e0bb9cfe59cc544.ctex"]
 
 [params]
 
