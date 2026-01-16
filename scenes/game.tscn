@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c8sxaxy5678u7"]
+[gd_scene load_steps=18 format=3 uid="uid://c8sxaxy5678u7"]
 
 [ext_resource type="Texture2D" uid="uid://rl1ewtwx08vo" path="res://assets/bg/Background.png" id="1_p57ef"]
 [ext_resource type="Texture2D" uid="uid://pmbfkxa5j14k" path="res://assets/bg/Foreground1 1200x135.png" id="1_u5sy4"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://iil4w84b3x0n" path="res://scenes/killzone.tscn" id="5_iywne"]
 [ext_resource type="Texture2D" uid="uid://buw867wag30u4" path="res://assets/bg/Sky 1200x135.png" id="5_kvpfn"]
 [ext_resource type="Texture2D" uid="uid://difafkd0c304d" path="res://assets/bg/Clouds 1200x135.png" id="6_dinhu"]
+[ext_resource type="PackedScene" uid="uid://d3ct2isiu3nbt" path="res://scenes/goblin.tscn" id="12_dinhu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lnu2h"]
 texture = ExtResource("2_yqjtg")
@@ -253,7 +254,6 @@ layer_0/tile_data = PackedInt32Array(65535, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, -65
 [node name="Background" type="Node" parent="."]
 
 [node name="BG" type="ParallaxBackground" parent="Background"]
-visible = false
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="Background/BG"]
 motion_mirroring = Vector2(540, 0)
@@ -268,7 +268,6 @@ texture = ExtResource("1_p57ef")
 
 [node name="BG2" type="ParallaxBackground" parent="Background"]
 layer = -99
-visible = false
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="Background/BG2"]
 motion_mirroring = Vector2(270, 0)
@@ -279,7 +278,6 @@ texture = ExtResource("1_u5sy4")
 
 [node name="BG3" type="ParallaxBackground" parent="Background"]
 layer = -99
-visible = false
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="Background/BG3"]
 motion_mirroring = Vector2(270, 0)
@@ -289,7 +287,6 @@ position = Vector2(10, -69)
 texture = ExtResource("3_0tnpc")
 
 [node name="BG4" type="ParallaxBackground" parent="Background"]
-visible = false
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="Background/BG4"]
 motion_mirroring = Vector2(270, 0)
@@ -300,7 +297,6 @@ texture = ExtResource("4_vtaks")
 
 [node name="BG5" type="ParallaxBackground" parent="Background"]
 layer = -102
-visible = false
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="Background/BG5"]
 motion_mirroring = Vector2(270, 0)
@@ -311,7 +307,6 @@ texture = ExtResource("5_kvpfn")
 
 [node name="BG6" type="ParallaxBackground" parent="Background"]
 layer = -101
-visible = false
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="Background/BG6"]
 motion_mirroring = Vector2(270, 0)
@@ -378,3 +373,6 @@ offset_right = -181.0
 offset_bottom = -104.0
 min_value = 10.0
 value = 10.0
+
+[node name="Goblin" parent="." instance=ExtResource("12_dinhu")]
+position = Vector2(452, -2)
