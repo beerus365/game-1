@@ -174,8 +174,9 @@ animations = [{
 radius = 4.0
 height = 12.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 z_index = 5
+collision_layer = 2
 script = ExtResource("1_g2els")
 jump_effect = ExtResource("2_fjrip")
 bullet_scene = ExtResource("6_tuyoq")

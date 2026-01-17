@@ -10,7 +10,7 @@ func _physics_process(delta: float) -> void:
 		var direction = (player.global_position - global_position).normalized()
 		velocity = direction * SPEED
 		
-			# Animation Handler
+		# Animation Handler
 		var dir_x : float = player.global_position.x - global_position.x
 		if dir_x > 0:
 			animated_sprite.flip_h = false
@@ -27,17 +27,14 @@ func _physics_process(delta: float) -> void:
 		
 	move_and_slide()
 
-
-	
-
-func _on_detect_body_entered(body):
-	if body.is_in_group("Player"):
-		print("hello")
+func _on_detect_body_entered(body: Node2D) -> void:
+	if body is Player:
+		print("hello", body.name)
 		player = body
 		player_chase = true
 
-func _on_detect_body_exited(body):
-	if body.is_in_group("Player"):
+func _on_detect_body_exited(body: Node2D) -> void:
+	if body is Player:
 		player = null
 		player_chase = false
 	

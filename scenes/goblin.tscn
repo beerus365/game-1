@@ -204,7 +204,7 @@ height = 14.0
 size = Vector2(146, 32)
 
 [node name="Goblin" type="CharacterBody2D"]
-collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_lkl8q")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -217,7 +217,7 @@ position = Vector2(-1, 1)
 shape = SubResource("CapsuleShape2D_2vxh5")
 
 [node name="detect" type="Area2D" parent="."]
-collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="detect"]
 position = Vector2(2, -6)
