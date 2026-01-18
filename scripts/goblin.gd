@@ -16,17 +16,23 @@ func _physics_process(delta: float) -> void:
 		velocity.y += get_gravity().y * delta
 
 	if player_chase and player:
-		var dir = sign(player.global_position.x - global_position.x)
-		velocity.x = dir * SPEED
+		attack()
 		
-		# Flip sprite
-		animated_sprite.flip_h = dir < 0
+		if attacking:
+			velocity.x = 0
+		else:
+			var dir = sign(player.global_position.x - global_position.x)
+			velocity.x = dir * SPEED
+			
+			# Flip sprite
+			animated_sprite.flip_h = dir < 0
+			
+			# Jump abstacles
+			if is_on_floor() and obstacle_in_direction(dir):
+				velocity.y = JUMP_VELOCITY
 		
-		# Jump abstacles
-		if is_on_floor() and obstacle_in_direction(dir):
-			velocity.y = JUMP_VELOCITY
-		
-		animated_sprite.play("run")
+		if not attacking:
+			animated_sprite.play("run")
 	else:
 		velocity.x = 0
 		animated_sprite.play("idle")
@@ -50,3 +56,21 @@ func _on_detect_body_exited(body: Node2D) -> void:
 	if body.is_in_group("Player"):
 		player = null
 		player_chase = false
+		
+# Attacking
+@export var attacking = false
+
+func hits_player(ray: RayCast2D) -> bool:
+	if ray.is_colliding():
+		var obj = ray.get_collider()
+		return obj is Player
+	return false
+	
+func attack():
+	if hits_player(ray_right) or hits_player(ray_left):
+		attacking = true
+		if animated_sprite.animation != "attack":
+			animated_sprite.play("attack")
+	else:
+		attacking = false
+	
