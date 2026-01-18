@@ -1,0 +1,62 @@
+[gd_scene load_steps=6 format=3 uid="uid://bfbihw05wsq85"]
+
+[ext_resource type="Texture2D" uid="uid://bnbmyh6y7xt3i" path="res://assets/sprites3/health_bar/healthbarUnder.png" id="1_nt7q6"]
+[ext_resource type="Script" uid="uid://c588u737ch755" path="res://scripts/ui.gd" id="1_x4jx1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nt7q6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x4jx1"]
+bg_color = Color(1, 0.27669197, 0.30438486, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nt7q6"]
+bg_color = Color(0.17576796, 0.26739305, 0.45763826, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_x4jx1")
+
+[node name="Health" type="Node" parent="."]
+
+[node name="Health_Bar" type="ProgressBar" parent="Health"]
+z_index = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 27.0
+offset_top = 24.0
+offset_right = -878.0
+offset_bottom = -606.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_nt7q6")
+theme_override_styles/fill = SubResource("StyleBoxFlat_x4jx1")
+value = 100.0
+show_percentage = false
+
+[node name="Sprite2D" type="Sprite2D" parent="Health"]
+position = Vector2(150.00002, 33)
+scale = Vector2(4.25, 4.1499996)
+texture = ExtResource("1_nt7q6")
+
+[node name="Mana" type="Node" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Mana"]
+position = Vector2(151.00002, 81)
+scale = Vector2(4.25, 4.1499996)
+texture = ExtResource("1_nt7q6")
+
+[node name="Mana_Bar" type="ProgressBar" parent="Mana"]
+offset_left = 27.0
+offset_top = 72.0
+offset_right = 275.0
+offset_bottom = 90.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_nt7q6")
+value = 100.0
+show_percentage = false

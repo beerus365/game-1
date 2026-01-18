@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c8sxaxy5678u7"]
+[gd_scene load_steps=19 format=3 uid="uid://c8sxaxy5678u7"]
 
 [ext_resource type="Texture2D" uid="uid://rl1ewtwx08vo" path="res://assets/bg/Background.png" id="1_p57ef"]
 [ext_resource type="Texture2D" uid="uid://pmbfkxa5j14k" path="res://assets/bg/Foreground1 1200x135.png" id="1_u5sy4"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://buw867wag30u4" path="res://assets/bg/Sky 1200x135.png" id="5_kvpfn"]
 [ext_resource type="Texture2D" uid="uid://difafkd0c304d" path="res://assets/bg/Clouds 1200x135.png" id="6_dinhu"]
 [ext_resource type="PackedScene" uid="uid://d3ct2isiu3nbt" path="res://scenes/goblin.tscn" id="12_dinhu"]
+[ext_resource type="PackedScene" uid="uid://bfbihw05wsq85" path="res://scenes/ui.tscn" id="13_kvuet"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lnu2h"]
 texture = ExtResource("2_yqjtg")
@@ -335,7 +336,6 @@ speed_scale = 0.407
 
 [node name="Player" parent="." instance=ExtResource("1_uwrxv")]
 position = Vector2(-2, 0)
-collision_layer = 2
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(2, -16)
@@ -364,15 +364,7 @@ position = Vector2(662, -3)
 [node name="Coin6" parent="Coins" instance=ExtResource("4_lbhrr")]
 position = Vector2(811, -16)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer"]
-offset_left = -251.0
-offset_top = -131.0
-offset_right = -181.0
-offset_bottom = -104.0
-min_value = 10.0
-value = 10.0
-
 [node name="Goblin" parent="." instance=ExtResource("12_dinhu")]
 position = Vector2(452, -2)
+
+[node name="UI" parent="." instance=ExtResource("13_kvuet")]
