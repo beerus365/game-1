@@ -132,6 +132,7 @@ func take_damage(amount: int) -> void:
 	print("Player health: ", health)
 	
 	
+	
 
 		
 		

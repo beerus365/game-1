@@ -23,7 +23,14 @@ func update_health():
 	health_bar.value = player.health
 	
 func _on_timer_timeout() -> void:
+	
+	# For mana regenaration
 	player.mana += player.MANA_REGEN
 	player.mana = clamp(player.mana, 0, player.MAX_MANA)
 	mana_bar.value = player.mana
+	
+	# For health regeneration
+	player.health += player.HEALTH_REGEN
+	player.health = clamp(player.health, 0, player.MAX_HEALTH)
+	health_bar.value = player.health
 	
