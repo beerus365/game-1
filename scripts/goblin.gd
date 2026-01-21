@@ -11,7 +11,6 @@ var damage_cooldown := 0.0
 @onready var ray_right: RayCast2D = $raycast_right
 @onready var ray_left: RayCast2D = $raycast_left
 @onready var health_damage = null
-@onready var player_node = $"../Player"
 
 var player: Node2D = null
 var player_chase := false
@@ -23,8 +22,8 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y += get_gravity().y * delta
 
-	if player_chase and player:
-		attack_player(player_node)
+	if player_chase and player != null:
+		attack_player(player)
 		
 		if attacking:
 			velocity.x = 0
@@ -56,13 +55,12 @@ func obstacle_in_direction(dir: int) -> bool:
 	return false
 
 func _on_detect_body_entered(body: Node2D) -> void:
-	if body.is_in_group("Player"):
+	if body is Player:
 		player = body
 		player_chase = true
-		health_damage = body.get_node("../UI")
 
 func _on_detect_body_exited(body: Node2D) -> void:
-	if body.is_in_group("Player"):
+	if body is Player:
 		player = null
 		player_chase = false
 		
@@ -82,14 +80,22 @@ func hits_player(ray: RayCast2D) -> bool:
 
 	return false
 	
-func attack_player(player: Player):
-	if hits_player(ray_right) or hits_player(ray_left):
-		attacking = true
-		animated_sprite.play("attack")
-		
-	
-	else:
+func attack_player(player: Player) -> void:
+	if player == null:
+		return
+
+	if not (hits_player(ray_right) or hits_player(ray_left)):
 		attacking = false
+		return
+
+	attacking = true
+	animated_sprite.play("attack")
+
+	if damage_cooldown > 0:
+		return
+
+	player.take_damage(DAMAGE)
+	damage_cooldown = DAMAGE_INTERVAL
 	
 
 	

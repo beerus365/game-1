@@ -13,6 +13,7 @@ var MANA_REGEN = 2
 var MANA_COST = 20
 
 @onready var animated_sprite = $AnimatedSprite2D
+@onready var ui = $"../UI"
 @export var jump_effect: PackedScene
 
 func _physics_process(delta: float) -> void:
@@ -122,7 +123,15 @@ func fire():
 	else:
 		bullet.setup(1)
 		
-
+# Damage taken of player from enemies
+func take_damage(amount: int) -> void:
+	health -= amount
+	health = clamp(health, 0, MAX_HEALTH)
+	
+	ui.update_health()
+	print("Player health: ", health)
+	
+	
 
 		
 		
