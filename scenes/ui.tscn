@@ -45,6 +45,10 @@ position = Vector2(150.00002, 33)
 scale = Vector2(4.25, 4.1499996)
 texture = ExtResource("1_nt7q6")
 
+[node name="HealthTimer" type="Timer" parent="Health"]
+wait_time = 3.0
+autostart = true
+
 [node name="Mana" type="Node" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Mana"]
@@ -61,8 +65,9 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_nt7q6")
 value = 100.0
 show_percentage = false
 
-[node name="Timer" type="Timer" parent="."]
+[node name="ManaTimer" type="Timer" parent="Mana"]
 wait_time = 0.5
 autostart = true
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Health/HealthTimer" to="." method="_on_health_timer_timeout"]
+[connection signal="timeout" from="Mana/ManaTimer" to="." method="_on_timer_timeout"]

@@ -3,7 +3,8 @@ class_name UI
 
 @onready var health_bar: ProgressBar = $Health/Health_Bar
 @onready var mana_bar: ProgressBar = $Mana/Mana_Bar
-@onready var mana_timer: Timer = $Mana/Timer
+@onready var mana_timer: Timer = $Mana/ManaTimer
+@onready var health_timer: Timer = $Health/HealthTimer
 @onready var player = $"../Player"
 @onready var goblin = $"../Goblin"
 
@@ -12,6 +13,7 @@ func _ready() -> void:
 	health_bar.value = player.MAX_HEALTH
 	
 	update_mana()
+	update_health()
 
 # Mana and health handler
 func update_mana():
@@ -29,8 +31,8 @@ func _on_timer_timeout() -> void:
 	player.mana = clamp(player.mana, 0, player.MAX_MANA)
 	mana_bar.value = player.mana
 	
+func _on_health_timer_timeout() -> void:
 	# For health regeneration
 	player.health += player.HEALTH_REGEN
 	player.health = clamp(player.health, 0, player.MAX_HEALTH)
 	health_bar.value = player.health
-	
