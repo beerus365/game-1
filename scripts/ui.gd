@@ -1,35 +1,29 @@
 extends CanvasLayer
+class_name UI
 
 @onready var health_bar: ProgressBar = $Health/Health_Bar
 @onready var mana_bar: ProgressBar = $Mana/Mana_Bar
-const Player = preload("uid://crwyjhpsaidfb")
-
-var mana := 100 
-var health := 100 
-const MAX_HEALTH = 100
-const MAX_MANA = 100
-const MANA_COST = 20
-const HEALTH_REGEN = 20
+@onready var mana_timer: Timer = $Mana/Timer
+@onready var player = $"../Player"
+@onready var goblin = $"../Goblin"
 
 func _ready() -> void:
-	mana_bar.max_value = MAX_MANA
-	health_bar.value = MAX_HEALTH
+	mana_bar.max_value = player.MAX_MANA
+	health_bar.value = player.MAX_HEALTH
 	
-	mana_bar.value = mana
-	health_bar.value = health
+	update_mana()
 
-func _physics_process(delta: float) -> void:
-	if Input.is_action_just_pressed("attack"):
-		if mana >= MANA_COST:
-			use_mana()
-		else:
-			print("Not enough mana")
+# Mana and health handler
+func update_mana():
+	mana_bar.value = player.mana
+	mana_bar.queue_redraw()
+	print("Mana:", player.mana, "Bar value:", mana_bar.value)
 	
-		
-
-# Mana handler
-func use_mana():
-	mana -= MANA_COST
-	mana = clamp(mana, 0, MAX_MANA)
-	mana_bar.value = mana
+func update_health():
+	health_bar.value = player.health
+	
+func _on_timer_timeout() -> void:
+	player.mana += player.MANA_REGEN
+	player.mana = clamp(player.mana, 0, player.MAX_MANA)
+	mana_bar.value = player.mana
 	

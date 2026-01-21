@@ -1,22 +1,30 @@
 extends CharacterBody2D
+class_name Goblin
 
 const SPEED = 50
 const JUMP_VELOCITY = -275
+const DAMAGE = 10
+const DAMAGE_INTERVAL = 0.5
+var damage_cooldown := 0.0
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var ray_right: RayCast2D = $raycast_right
 @onready var ray_left: RayCast2D = $raycast_left
+@onready var health_damage = null
+@onready var player_node = $"../Player"
 
 var player: Node2D = null
 var player_chase := false
 
-
 func _physics_process(delta: float) -> void:
+	if damage_cooldown > 0:
+		damage_cooldown -= delta
+	
 	if not is_on_floor():
 		velocity.y += get_gravity().y * delta
 
 	if player_chase and player:
-		attack()
+		attack_player(player_node)
 		
 		if attacking:
 			velocity.x = 0
@@ -51,6 +59,7 @@ func _on_detect_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
 		player = body
 		player_chase = true
+		health_damage = body.get_node("../UI")
 
 func _on_detect_body_exited(body: Node2D) -> void:
 	if body.is_in_group("Player"):
@@ -58,19 +67,31 @@ func _on_detect_body_exited(body: Node2D) -> void:
 		player_chase = false
 		
 # Attacking
-@export var attacking = false
+var attacking := false
+var can_damage := true
 
 func hits_player(ray: RayCast2D) -> bool:
 	if ray.is_colliding():
 		var obj = ray.get_collider()
-		return obj is Player
+
+		if obj.is_in_group("Player"):
+			return true
+
+		if obj.get_parent() and obj.get_parent().is_in_group("Player"):
+			return true
+
 	return false
 	
-func attack():
+func attack_player(player: Player):
 	if hits_player(ray_right) or hits_player(ray_left):
 		attacking = true
-		if animated_sprite.animation != "attack":
-			animated_sprite.play("attack")
+		animated_sprite.play("attack")
+		
+	
 	else:
 		attacking = false
 	
+
+	
+		
+		

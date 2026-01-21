@@ -4,6 +4,14 @@ class_name Player
 const SPEED = 100.0
 const JUMP_VELOCITY = -275.0
 
+var health := 100
+var mana := 100
+var MAX_HEALTH = 100
+var MAX_MANA = 100
+var HEALTH_REGEN = 20
+var MANA_REGEN = 2
+var MANA_COST = 20
+
 @onready var animated_sprite = $AnimatedSprite2D
 @export var jump_effect: PackedScene
 
@@ -55,7 +63,6 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 func _play_jump_effect():
-
 	var fx = jump_effect.instantiate()
 	fx.global_position = global_position + Vector2(0, 0)
 	
@@ -78,9 +85,20 @@ func _attack():
 	await animated_sprite.animation_finished
 	attacking = false
 	
+func use_mana():
+	mana -= MANA_COST
+	mana = clamp(mana, 0, MAX_MANA)
+	
+func _attempt_attack():
+	if mana >= MANA_COST:
+		use_mana()
+		_attack()
+	else:
+		print("Not enough mana")
+	
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("attack"):
-		_attack()
+		_attempt_attack()
 		
 func fire():
 	if bullet_scene == null:
@@ -103,6 +121,9 @@ func fire():
 		bullet.setup(-1)
 	else:
 		bullet.setup(1)
+		
+
+
 		
 		
 	

@@ -344,6 +344,13 @@ limit_top = -10000021
 limit_bottom = 64
 limit_smoothed = true
 
+[node name="UI" parent="." instance=ExtResource("13_kvuet")]
+
+[node name="Enemies" type="Node" parent="."]
+
+[node name="Goblin" parent="Enemies" instance=ExtResource("12_dinhu")]
+position = Vector2(454, -2)
+
 [node name="Coins" type="Node" parent="."]
 
 [node name="Coin" parent="Coins" instance=ExtResource("4_lbhrr")]
@@ -363,8 +370,3 @@ position = Vector2(662, -3)
 
 [node name="Coin6" parent="Coins" instance=ExtResource("4_lbhrr")]
 position = Vector2(811, -16)
-
-[node name="Goblin" parent="." instance=ExtResource("12_dinhu")]
-position = Vector2(452, -2)
-
-[node name="UI" parent="." instance=ExtResource("13_kvuet")]
